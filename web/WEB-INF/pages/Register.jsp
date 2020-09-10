@@ -12,7 +12,7 @@
     <title>用户注册</title>
 </head>
 <body style="text-align: center;">
-<form action="${pageContext.request.contextPath}/servlet/RegisterServlet" method="post">
+<form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
     <table width="%" border="">
         <tr>
             <td>用户名</td>
