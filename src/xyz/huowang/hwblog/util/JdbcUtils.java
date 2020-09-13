@@ -1,5 +1,7 @@
 package xyz.huowang.hwblog.util;
 
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 
 /**
@@ -10,27 +12,31 @@ import java.sql.*;
  */
 public class JdbcUtils {
     Connection connection;
+    //通过Logger的getLogger获取一个Loogger实例
+    public static Logger log= Logger.getLogger(JdbcUtils.class);
     //加载驱动
     static {
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            System.out.println("数据库加载成功！");
-        }
-        catch (ClassNotFoundException e) {
+            log.info("数据库加载成功！");
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            log.error("数据库加载失败！");
         }
+
     }
-    Connection getConn(){
+    private Connection getConn(){
         String url="jdbc:mysql://localhost:3306/hwblog";
         String userName="root";
         String passWord="HJJ119108";
         try {
             connection= DriverManager.getConnection(url,userName,passWord);
             if (connection!=null) {
-                System.out.println("链接成功！");
+                log.info("数据库链接成功!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            log.error("数据库链接失败!");
         }
         return connection;
     }
@@ -47,47 +53,42 @@ public class JdbcUtils {
 
         statement = con.createStatement();
         rs = statement.executeQuery(sql);
-
+        if(rs==null){
+            log.error("查询数据返回为空");
+        }
         return rs;
     }
-    //输出查询结果,用于测试，不使用
-    public void outPut(ResultSet rs)throws Exception{
-        while(rs.next()) {
-            String couname=rs.getString("couname");
-            String truename=rs.getString("truename");
-            String grade=rs.getString("grade");
-            System.out.println(couname+" "+truename+" "+grade+"");
-        }
-    }
+
     //数据更新
     public void Update(String sql) throws Exception {
         test=new JdbcUtils();
         con=test.getConn();
-        System.out.println(con.getCatalog());
+
         statement = con.createStatement();
         int i=statement.executeUpdate(sql);
         if(i>0) {
-            System.out.println("操作数据成功!");
+            log.info("数据库操作成功！");
         }else {
-            System.out.println("操作数据失败!");
+            log.error("数据库操作失败！");
         }
     }
+
     //关闭占用资源
     public void closeSource() throws Exception{
         if (rs!=null) {
             rs.close();
             rs=null;
-            System.out.println("关闭rs成功！");
+            log.info("关闭rs成功!");
         }
         if(statement!=null) {
             statement.close();
             statement=null;
-            System.out.println("关闭statement成功！");
+            log.info("关闭statement成功!");
         }
         if(con!=null && con.isClosed()==false) {
             con.close();
             con=null;
-            System.out.println("关闭数据库的连接成功");
+            log.info("关闭数据库的连接成功!");
         }
     }
 }

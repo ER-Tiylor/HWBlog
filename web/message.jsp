@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HW
@@ -8,9 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>ERROR</title>
 </head>
-<body>
-ERROR !!
+<input type="hidden" value="<c:out value="" />">
+    <c:forEach items="${message}" var="row">
+        <c:out value="${row}" />
+    </c:forEach>
 </body>
 </html>

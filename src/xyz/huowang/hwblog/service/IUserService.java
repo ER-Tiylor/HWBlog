@@ -1,7 +1,6 @@
 package xyz.huowang.hwblog.service;
 
 import xyz.huowang.hwblog.domain.User;
-import xyz.huowang.hwblog.exception.UserExistException;
 
 /**
  * @author ：HW
@@ -14,14 +13,14 @@ public interface IUserService {
     /**
      * 提供注册服务
      * @param user
-     * @throws UserExistException
+     * @throws
      */
-    void registerUser(User user) throws UserExistException;
+    void registerUser(User user) throws Exception;
     /**
      * 提供登录服务
      * @param userName
      * @param userPwd
      * @return
      */
-    User loginUser(String userName, String userPwd);
+    User loginUser(String userName,String userPwd) throws Exception;
 }

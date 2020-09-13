@@ -1,4 +1,4 @@
-# 环境配置
+# 一、环境配置
 
 #### 通过设置tomcat启动参数 实现用户的区域region和语言locale language的设定
 
@@ -9,7 +9,7 @@ D:\JAVA\apache-tomcat-9.0.37\bin\catalina.bat
 
 
 
-# 创建web动态项目
+# 二、创建web动态项目
 
 ### 一.创建JavaWeb
 
@@ -131,7 +131,7 @@ D:\JAVA\apache-tomcat-9.0.37\bin\catalina.bat
 
 
 
-# 项目结构
+# 三、项目结构
 
 包路径：src-->xyz-->huowang-->hwblog-->
 
@@ -191,7 +191,7 @@ web:
 
 
 
-# Log4j的日志输出配置
+# 四、Log4j的日志输出配置
 
 ### 一、 Log4j简介
 
@@ -443,6 +443,228 @@ log4j.appender.im.password = password
 log4j.appender.im.recipient = corlin@cybercorlin.net
 log4j.appender.im.layout=org.apache.log4j.PatternLayout
 log4j.appender.im.layout.ConversionPattern=[%-5p] %d(%r) --> [%t] %l: %m %x %n
+```
+
+使用：
+
+01.off         最高等级，用于关闭所有日志记录。
+02.fatal       指出每个严重的错误事件将会导致应用程序的退出。
+03.error      指出虽然发生错误事件，但仍然不影响系统的继续运行。
+04.warm     表明会出现潜在的错误情形。
+05.info         一般和在粗粒度级别上，强调应用程序的运行全程。
+06.debug     一般用于细粒度级别上，对调试应用程序非常有帮助。
+07.all           最低等级，用于打开所有日志记录。
+
+```
+package cn.hyj.one;
+import org.apache.log4j.Logger;
+public class Test {
+
+    //通过Logger的getLogger获取一个Loogger实例
+    public static Logger lo=Logger.getLogger(Test.class);
+    public static void main(String[] args) {
+        try {
+            int result=5/0;//出现异常
+        } catch (Exception e) {
+            System.out.println("除数不能为零！");
+            lo.info("除数不能为0");//保存日志
+            lo.trace("我是logger1，trace");
+
+            lo.debug("我是logger1，debug");
+
+            lo.info("我是logger1，info");
+
+            lo.warn("我是logger1，warn");
+
+            lo.error("我是logger1，error");
+
+            lo.fatal("我是logger1，fatal");
+        }
+  
+    }
+}
+```
+
+# 五、过滤器
+### 1.过滤器介绍
+    Java中的Filter 并不是一个标准的Servlet ，它不能处理用户请求，也不能对客户端生成响应。 
+    主要用于对HttpServletRequest 进行预处理，也可以对HttpServletResponse 进行后处理，是个典型的处理链。
+    优点：过滤链的好处是，执行过程中任何时候都可以打断，只要不执行chain.doFilter()就不会再执行后面的过滤器和请求的内容。
+    而在实际使用时，就要特别注意过滤链的执行顺序问题
+#### 过滤器的作用描述
+    * 在HttpServletRequest 到达Servlet 之前，拦截客户的HttpServletRequest 。 
+    * 根据需要检查HttpServletRequest ，也可以修改HttpServletRequest 头和数据。 
+    * 在HttpServletResponse 到达客户端之前，拦截HttpServletResponse 。 
+    * 根据需要检查HttpServletResponse ，可以修改HttpServletResponse 头和数据。
+### 2.Filter接口
+#### 1.如何驱动
+    在 web 应用程序启动时，web 服务器将根据 web.xml 文件中的配置信息来创建每个注册的 Filter 实例对象，并将其保存在服务器的内存中
+#### 2.方法介绍：
+    * init()  Init 方法在 Filter 生命周期中仅执行一次，web 容器在调用 init 方法时
+    * destory()  在Web容器卸载 Filter 对象之前被调用。该方法在Filter的生命周期中仅执行一次。在这个方法中，可以释放过滤器使用的资源。
+    * doFilter() Filter 链的执行 
+### 3.FilterChain接口
+#### 1.如何实例化
+    代表当前 Filter 链的对象。由容器实现，容器将其实例作为参数传入过滤器对象的doFilter()方法中
+#### 2.作用
+    调用过滤器链中的下一个过滤器
+
+### 4.Filter示例
+#### 1.web.xml配置
+```xml
+    <!-- 编码过滤器 -->  
+        <filter>  
+            <filter-name>setCharacterEncoding</filter-name>  
+            <filter-class>com.company.strutstudy.web.servletstudy.filter.EncodingFilter</filter-class>  
+            <init-param>  
+                <param-name>encoding</param-name>  
+                <param-value>utf-8</param-value>  
+            </init-param>  
+        </filter>  
+        <filter-mapping>  
+            <filter-name>setCharacterEncoding</filter-name>  
+            <url-pattern>/*</url-pattern>  
+        </filter-mapping>  
+       
+    <!-- 请求url日志记录过滤器 -->  
+        <filter>  
+            <filter-name>logfilter</filter-name>  
+            <filter-class>com.company.strutstudy.web.servletstudy.filter.LogFilter</filter-class>  
+        </filter>  
+        <filter-mapping>  
+            <filter-name>logfilter</filter-name>  
+            <url-pattern>/*</url-pattern>  
+        </filter-mapping>  
+
+```
+#### 2.编码拦截器
+```java
+    public class EncodingFilter implements Filter {  
+        private String encoding;  
+        private Map<String, String> params = new HashMap<String, String>();  
+        // 项目结束时就已经进行销毁  
+        public void destroy() {  
+            System.out.println("end do the encoding filter!");  
+            params=null;  
+            encoding=null;  
+        }  
+        public void doFilter(ServletRequest req, ServletResponse resp,  
+                FilterChain chain) throws IOException, ServletException {  
+            //UtilTimerStack.push("EncodingFilter_doFilter:");  
+            System.out.println("before encoding " + encoding + " filter！");  
+            req.setCharacterEncoding(encoding);  
+            // resp.setCharacterEncoding(encoding);  
+            // resp.setContentType("text/html;charset="+encoding);  
+            chain.doFilter(req, resp);        
+            System.out.println("after encoding " + encoding + " filter！");  
+            System.err.println("----------------------------------------");  
+            //UtilTimerStack.pop("EncodingFilter_doFilter:");  
+        }  
+       
+        // 项目启动时就已经进行读取  
+        public void init(FilterConfig config) throws ServletException {  
+            System.out.println("begin do the encoding filter!");  
+            encoding = config.getInitParameter("encoding");  
+            for (Enumeration e = config.getInitParameterNames(); e  
+                    .hasMoreElements();) {  
+                String name = (String) e.nextElement();  
+                String value = config.getInitParameter(name);  
+                params.put(name, value);  
+            }  
+        }  
+     }  
+
+```
+```java
+
+    public class LogFilter implements Filter {  
+        FilterConfig config;  
+       
+        public void destroy() {  
+            this.config = null;  
+        }  
+       
+        public void doFilter(ServletRequest req, ServletResponse res,  
+                FilterChain chain) throws IOException, ServletException {  
+            // 获取ServletContext 对象，用于记录日志  
+            ServletContext context = this.config.getServletContext();  
+            //long before = System.currentTimeMillis();  
+            System.out.println("before the log filter!");  
+            //context.log("开始过滤");  
+            // 将请求转换成HttpServletRequest 请求  
+            HttpServletRequest hreq = (HttpServletRequest) req;  
+            // 记录日志  
+            System.out.println("Log Filter已经截获到用户的请求的地址:"+hreq.getServletPath() );  
+            //context.log("Filter已经截获到用户的请求的地址: " + hreq.getServletPath());  
+            try {  
+                // Filter 只是链式处理，请求依然转发到目的地址。  
+                chain.doFilter(req, res);  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            }  
+            System.out.println("after the log filter!");  
+            //long after = System.currentTimeMillis();  
+            // 记录日志  
+            //context.log("过滤结束");  
+            // 再次记录日志  
+            //context.log(" 请求被定位到" + ((HttpServletRequest) req).getRequestURI()  
+            //      + "所花的时间为: " + (after - before));  
+        }  
+       
+        public void init(FilterConfig config) throws ServletException {  
+            System.out.println("begin do the log filter!");  
+            this.config = config;  
+        }  
+       
+     }  
+
+```
+#### HelloServlet类
+```java
+
+    public class HelloWorldServlet extends HttpServlet{  
+       
+        /** 
+         * 查看httpservlet实现的service一看便知，起到了一个controll控制器的作用(转向的) 
+         * 之后便是跳转至我们熟悉的doget,dopost等方法中  
+         */  
+        @Override  
+        protected void service(HttpServletRequest req, HttpServletResponse resp)  
+                throws ServletException, IOException {  
+            System.out.println("doservice..."+this.getInitParameter("encoding"));  
+              
+            super.service(req, resp);  
+        }  
+       
+        @Override  
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp)  
+                throws ServletException, IOException {  
+            System.out.println("doget...");  
+            doPost(req, resp);  
+        }  
+       
+        @Override  
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp)  
+                throws ServletException, IOException {  
+            System.out.println("dopost...");  
+        }  
+          
+          
+       
+     }  
 
 ```
 
+
+
+
+
+# 六、预实现功能
+
+### 1.用户登录
+
+### 2.用户注册
+
+### 3.博客管理
+
+### 4.用户管理

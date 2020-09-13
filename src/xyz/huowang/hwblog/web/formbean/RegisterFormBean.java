@@ -1,6 +1,10 @@
 package xyz.huowang.hwblog.web.formbean;
 
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.log4j.Logger;
+import xyz.huowang.hwblog.constants.Constant;
+import xyz.huowang.hwblog.constants.ErrorConstant;
+import xyz.huowang.hwblog.util.BaseUtil;
+import xyz.huowang.hwblog.util.WebUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,17 +19,46 @@ import java.util.Map;
  * @version: 1.0
  */
 public class RegisterFormBean {
+
+    public static Logger log= Logger.getLogger(RegisterFormBean.class);
     //RegisterFormBean中的属性与register.jsp中的表单输入项的name一一对应
-    //<input type="text" name="userName">
     private String userName;
-    //<input type="password" name="userPwd">
-    private String userPwd;
-    //<input type="password" name="confirmPwd">
+    private String userPassWord;
     private String confirmPwd;
-    //<input type="text" name="email"/>
-    private String email;
-    //<input type="text" name="birthday"/>
-    private String birthday;
+    private String userEmail;
+    private String userBirthday;
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getUserPassWord() {
+        return userPassWord;
+    }
+    public void setUserPassWord(String userPassWord) {
+        this.userPassWord = userPassWord;
+    }
+    public String getConfirmPwd() {
+        return confirmPwd;
+    }
+    public void setConfirmPwd(String confirmPwd) {
+        this.confirmPwd = confirmPwd;
+    }
+    public String getUserEmail() {
+        return userEmail;
+    }
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+    public String getUserBirthday() {
+        return userBirthday;
+    }
+    public void setUserBirthday(String userBirthday) {
+        this.userBirthday = userBirthday;
+    }
+
     /**
      * 存储校验不通过时给用户的错误提示信息
      */
@@ -36,89 +69,54 @@ public class RegisterFormBean {
     public void setErrors(Map<String, String> errors) {
         this.errors = errors;
     }
-    /*
-     * validate方法负责校验表单输入项
-     * 表单输入项校验规则：
-     * private String userName; 用户名不能为空，并且要是-的字母 abcdABcd
-     * private String userPwd; 密码不能为空，并且要是-的数字
-     * private String confirmPwd; 两次密码要一致
-     * private String email; 可以为空，不为空要是一个合法的邮箱
-     * private String birthday; 可以为空，不为空时，要是一个合法的日期
-     */
+    @Override
+    public String toString() {
+        return "RegisterFormBean{" +
+                "errors=" + errors +
+                '}';
+    }
+
     public boolean validate() {
         boolean isOk = true;
-        if (this.userName == null || this.userName.trim().equals("")) {
+        if (BaseUtil.isNullOrEmpty(this.userName)) {
             isOk = false;
-            errors.put("userName", "用户名不能为空！！");
-        } else {
-            if (!this.userName.matches("[a-zA-Z]{,}")) {
-                isOk = false;
-                errors.put("userName", "用户名必须是-位的字母！！");
-            }
+            errors.put(Constant.USERNAME, "用户名不能为空！！");
+        }else if(!WebUtils.checkName(this.userName)){
+            errors.put(Constant.USERNAME, "用户名不符合要求！！");
         }
-        if (this.userPwd == null || this.userPwd.trim().equals("")) {
+
+        if (BaseUtil.isNullOrEmpty(this.userPassWord)) {
             isOk = false;
-            errors.put("userPwd", "密码不能为空！！");
-        } else {
-            if (!this.userPwd.matches("\\d{,}")) {
+            errors.put(Constant.USERPWD, "密码不能为空！！");
+        } else if(!WebUtils.checkPwd(this.userPassWord)){
                 isOk = false;
-                errors.put("userPwd", "密码必须是-位的数字！！");
+                errors.put(Constant.USERPWD, "密码必须是6-20位字母数字组合！！");
+        }
+
+        if (BaseUtil.isNullOrEmpty(this.confirmPwd)) {
+            if (!this.confirmPwd.equals(this.userPassWord)) {
+                isOk = false;
+                errors.put(Constant.CONFIRMPWD, "两次密码输入必须一致！！");
             }
         }
-        // private String password; 两次密码要一致
-        if (this.confirmPwd != null) {
-            if (!this.confirmPwd.equals(this.userPwd)) {
-                isOk = false;
-                errors.put("confirmPwd", "两次密码不一致！！");
-            }
+
+        if (BaseUtil.isNullOrEmpty(this.userEmail)) {
+            isOk = false;
+            errors.put(Constant.USEREMAIL, "邮箱不能为空！！");
+        }else if (!WebUtils.checkEmail(this.userEmail)) {
+            isOk = false;
+            errors.put(Constant.USEREMAIL, "邮箱不是一个合法邮箱！！");
         }
-        // private String email; 可以为空，不为空要是一个合法的邮箱
-        if (this.email != null && !this.email.trim().equals("")) {
-            if (!this.email.matches("\\w+@\\w+(\\.\\w+)+")) {
-                isOk = false;
-                errors.put("email", "邮箱不是一个合法邮箱！！");
-            }
+
+        if(BaseUtil.isNullOrEmpty(this.userBirthday)){
+            isOk = false;
+            errors.put(Constant.USERBIRTHDAY, "出生日期不能为空！！");
         }
-        // private String birthday; 可以为空，不为空时，要是一个合法的日期
-        if (this.birthday != null && !this.birthday.trim().equals("")) {
-            try {
-                DateLocaleConverter conver = new DateLocaleConverter();
-                conver.convert(this.birthday);
-            } catch (Exception e) {
-                isOk = false;
-                errors.put("birthday", "生日必须要是一个日期！！");
-            }
+
+        if(!isOk){
+            log.warn(ErrorConstant.PLEASE_CHECK_INPUT);
         }
         return isOk;
     }
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    public String getUserPwd() {
-        return userPwd;
-    }
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
-    }
-    public String getConfirmPwd() {
-        return confirmPwd;
-    }
-    public void setConfirmPwd(String confirmPwd) {
-        this.confirmPwd = confirmPwd;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getBirthday() {
-        return birthday;
-    }
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
+
 }

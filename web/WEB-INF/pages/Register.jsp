@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HW
@@ -17,31 +18,35 @@
         <tr>
             <td>用户名</td>
             <td><%--使用EL表达式${}提取存储在request对象中的formbean对象中封装的表单数据(formbean.userName)以及错误提示消息(formbean.errors.userName)--%>
-                <input type="text" name="userName" value="${formbean.userName}">${formbean.errors.userName}
+                <input type="text" name="userName" value="${message.userName}">${message.errors.userName}
             </td>
         </tr>
         <tr>
             <td>密码</td>
             <td>
-                <input type="password" name="userPwd" value="${formbean.userPwd}">${formbean.errors.userPwd}
+                <input type="password" name="userPassWord" value="${message.userPassWord}">
+                <c:out value="${message.errors.userPassWord}"/>
             </td>
         </tr>
         <tr>
             <td>确认密码</td>
             <td>
-                <input type="password" name="confirmPwd" value="${formbean.confirmPwd}">${formbean.errors.confirmPwd}
+                <input type="password" name="confirmPwd" value="${message.confirmPwd}" />
+                <c:out value="${message.errors.confirmPwd}"/>
             </td>
         </tr>
         <tr>
             <td>邮箱</td>
             <td>
-                <input type="text" name="email" value="${formbean.email}">${formbean.errors.email}
+                <input type="text" name="userEmail" value="${message.userEmail}">
+                <c:out value="${message.errors.userEmail}"/>
             </td>
         </tr>
         <tr>
             <td>出生年月</td>
             <td>
-                <input type="text" name="birthday" value="${formbean.birthday}">${formbean.errors.birthday}
+                <input type="date" name="userBirthday" value="${message.userBirthday}">
+                <c:out value="${message.errors.userBirthday}"/>
             </td>
         </tr>
         <tr>

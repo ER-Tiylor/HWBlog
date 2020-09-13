@@ -1,11 +1,9 @@
 package xyz.huowang.hwblog.web.controller;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.log4j.Logger;
+import xyz.huowang.hwblog.constants.Constant;
 import xyz.huowang.hwblog.constants.ErrorConstant;
 import xyz.huowang.hwblog.domain.User;
-import xyz.huowang.hwblog.exception.UserExistException;
 import xyz.huowang.hwblog.service.IUserService;
 import xyz.huowang.hwblog.service.impl.UserServiceImpl;
 import xyz.huowang.hwblog.util.WebUtils;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * @author ：HW
@@ -26,44 +23,38 @@ import java.util.Date;
  */
 public class RegisterServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public static Logger log= Logger.getLogger(RegisterServlet.class);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        User user = new User();
         //将客户端提交的表单数据封装到RegisterFormBean对象中
         RegisterFormBean formbean = WebUtils.requestBean(request,RegisterFormBean.class);
-        //校验用户注册填写的表单数据
-        if (formbean.validate() == false) {//如果校验失败
-            //将封装了用户填写的表单数据的formbean对象发送回register.jsp页面的form表单中进行显示
-            request.setAttribute("formbean", formbean);
-            //校验失败就说明是用户填写的表单数据有问题，那么就跳转回register.jsp
-            request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
-            return;
-        }
-        User user = new User();
-        try {
-            // 注册字符串到日期的转换器
-            ConvertUtils.register(new DateLocaleConverter(), Date.class);
-            BeanUtils.copyProperties(user, formbean);//把表单的数据填充到javabean中
-            user.setUserID(WebUtils.makeId());//设置用户的Id属性
+
+        if (formbean.validate()) {
+            user = WebUtils.copyFormToUser(formbean,user);
             IUserService service = new UserServiceImpl();
             //调用service层提供的注册用户服务实现用户注册
-            service.registerUser(user);
-            String message = String.format(
-                    "注册成功！！秒后为您自动跳到登录页面！！<meta http-equiv='refresh' content=';url=%s'/>",
-                    request.getContextPath()+"/LoginUIServlet");
-            request.setAttribute("message",message);
-            request.getRequestDispatcher("/message.jsp").forward(request,response);
-        } catch (UserExistException e) {
-            formbean.getErrors().put("userName", ErrorConstant.REGISTER_USER_ALREADY_EXIST);
-            request.setAttribute("formbean", formbean);
-            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace(); // 在后台记录异常
-            request.setAttribute("message", ErrorConstant.REGISTER_DEFEAT);
-            request.getRequestDispatcher("/message.jsp").forward(request,response);
+            try {
+                service.registerUser(user);
+                request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
+            } catch (Exception e) {
+                request.setAttribute("message", ErrorConstant.REGISTER_DEFEAT);
+                request.getRequestDispatcher("/message.jsp").forward(request, response);
+                e.printStackTrace();
+                log.error(e.toString()+user.toString()+ErrorConstant.REGISTER_DEFEAT);
+            }
+        }else{
+            //将封装了用户填写的表单数据的formbean对象发送回register.jsp页面的form表单中进行显示
+            request.setAttribute(Constant.MESSAGE, formbean);
+            //校验失败就说明是用户填写的表单数据有问题，那么就跳转回register.jsp
+            request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+            log.warn(formbean.toString());
         }
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
     }
 }

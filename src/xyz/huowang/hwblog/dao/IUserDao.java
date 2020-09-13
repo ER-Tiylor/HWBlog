@@ -1,9 +1,6 @@
 package xyz.huowang.hwblog.dao;
 
-import xyz.huowang.hwblog.domain.CriteriaUser;
 import xyz.huowang.hwblog.domain.User;
-
-import java.util.List;
 
 /**
  * @author ：HW
@@ -12,48 +9,39 @@ import java.util.List;
  * @version: 1.0
  */
 public interface IUserDao {
-    /**
-     * 模糊查询 返回满足条件的List
-     * @param cc ：封装了查询条件
-     * @return
-     */
-    public List<User> getForListWithCriteriaCustomer(CriteriaUser cc);
 
     /**
-     * 根据用户名和密码来查找用户
-     * @param userName
-     * @param userPwd
-     * @return 查到到的用户
+     * 用户登录（需要传入两个参数）
+     * @param: username 用户名
+     * @param: password 密码
+     * @return:
+     * @throws:
      */
-    User find(String userName, String userPwd);
-
-    /**根据用户名来查找用户
-     * @param userName
-     * @return 查到到的用户
-     */
-    User find(String userName);
-    /**
-     * 查询 返回 List
-     */
-    public List<User> getAll();
+    User findUser(String userName, String passWord) throws Exception;
 
     /**
-     * 增加
+     * 根据用户名查找用户
+     * @param: username 用户名
+     * @return:  用户对象
+     * @throws:
      */
-    public void saveUser(User customer);
+    User findUser(String userName) throws Exception;
 
     /**
-     * 修改 更新时候的查询（根据id）显示
+     * 根据邮箱查看用户是否已经注册
+     * @param: email
+     * @return:  用户对象
+     * @throws:
      */
-    public User getUser(Integer id);
+    User isExist(String email) throws Exception;
 
     /**
-     * 删除
+     * 用于用户注册
+     * @param: user
+     * @return:  int
+     * @throws: SQLException
      */
-    public void deleteUser(Integer id);
+    int addUser(User user) throws Exception;
 
-    /**
-     * 返回和name 相同的记录数
-     */
-    public long getCountWithName(String name);
+
 }

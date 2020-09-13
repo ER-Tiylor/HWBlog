@@ -19,67 +19,51 @@ public class User {
     public String getUserID() {
         return userID;
     }
-
     public void setUserID(String userID) {
         this.userID = userID;
     }
-
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
     public String getUserPassWord() {
         return userPassWord;
     }
-
     public void setUserPassWord(String userPassWord) {
         this.userPassWord = userPassWord;
     }
-
     public String getUserSex() {
         return userSex;
     }
-
     public void setUserSex(String userSex) {
         this.userSex = userSex;
     }
-
     public String getUserTelNum() {
         return userTelNum;
     }
-
     public void setUserTelNum(String userTelNum) {
         this.userTelNum = userTelNum;
     }
-
     public String getUserEmail() {
         return userEmail;
     }
-
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-
     public String getUserBirthday() {
         return userBirthday;
     }
-
     public void setUserBirthday(String userBirthday) {
         this.userBirthday = userBirthday;
     }
-
     public String getUserFlag() {
         return userFlag;
     }
-
     public void setUserFlag(String userFlag) {
         this.userFlag = userFlag;
     }
-
     public User(String userID, String userName, String userPassWord, String userSex, String userTelNum, String userEmail, String userBirthday, String userFlag) {
         this.userID = userID;
         this.userName = userName;
@@ -100,7 +84,6 @@ public class User {
         return "User{" +
                 "userID='" + userID + '\'' +
                 ", userName='" + userName + '\'' +
-                ", userPassWord='" + userPassWord + '\'' +
                 ", userSex='" + userSex + '\'' +
                 ", userTelNum='" + userTelNum + '\'' +
                 ", userEmail='" + userEmail + '\'' +
