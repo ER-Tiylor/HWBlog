@@ -8,15 +8,16 @@ import java.io.IOException;
 
 /**
  * @author ：HW
- * @date ：Created in 2020/9/8 22:45
- * @description：TODO
+ * @date ：Created in 2020/9/8 22:59
+ * @description：
+ *      LoginUIServlet负责为用户输出登陆界面
+ *      当用户访问LoginUIServlet时，就跳转到WEB-INF/pages目录下的login.jsp页面
  * @version: 1.0
  */
-public class RegisterUIServlet extends HttpServlet {
-
+public class MainLoginUIServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
             //调用service层提供的注册用户服务实现用户注册
             try {
                 service.registerUser(user);
-                request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
             } catch (Exception e) {
                 request.setAttribute("message", ErrorConstant.REGISTER_DEFEAT);
                 request.getRequestDispatcher("/message.jsp").forward(request, response);

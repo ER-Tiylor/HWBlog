@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 //登录成功后，就将用户存储到session中
                 request.getSession().setAttribute(Constant.USER, user);
                 log.info(user.toString());
-                request.getRequestDispatcher("/main.jsp").forward(request, response);
+                request.getRequestDispatcher("/Main.jsp").forward(request, response);
             } catch (Exception e) {
                 request.setAttribute("message", ErrorConstant.LOGIN_DEFEAT);
                 request.getRequestDispatcher("/message.jsp").forward(request, response);
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             //将封装了用户填写的表单数据的formbean对象发送回Login.jsp页面的form表单中进行显示
             request.setAttribute(Constant.MESSAGE, formbean);
             //校验失败就说明是用户填写的表单数据有问题，那么就跳转回Login.jsp
-            request.getRequestDispatcher("/WEB-INF/pages/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
             log.warn(formbean.toString());
         }
 

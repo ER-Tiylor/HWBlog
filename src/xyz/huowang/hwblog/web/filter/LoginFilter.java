@@ -17,7 +17,7 @@
 //    // 需要定义系统页面访问中可放行的链接
 //    private List<String> list = new ArrayList<String>();
 //    public void init(FilterConfig arg0) throws ServletException {
-//        list.add("/main.jsp");
+//        list.add("/Main.jsp");
 //        list.add("/LoginAction.do");
 //    }
 //

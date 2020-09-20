@@ -28,7 +28,7 @@ public class JdbcUtils {
     private Connection getConn(){
         String url="jdbc:mysql://localhost:3306/hwblog";
         String userName="root";
-        String passWord="*********";
+        String passWord="HJJ119108";
         try {
             connection= DriverManager.getConnection(url,userName,passWord);
             if (connection!=null) {

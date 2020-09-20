@@ -1,0 +1,104 @@
+header { position: fixed; top: 0; z-index: 100}
+article { width: 1000px; margin: 150px auto 0; overflow: hidden;}
+.nav { background-color: rgba(255,255,255,0.9);}
+/*article*/
+.picsbox { width: 100%;height: 350px; overflow: hidden;}
+/*toppic*/
+.banner { width: 60%;height: 100%; overflow: hidden; float: left }
+.fader { position: relative; width: 100%;height: 100%; font-family: "futura", arial; overflow: hidden; }
+.fader .slide { position: absolute; width: 100%; top: 0; z-index: 1; opacity: 1; height: 100%; }
+.fader .slide img { width: 100%; height: 100%; }
+.fader .prev, .fader .next {
+    position: absolute;
+    height: 80px; width: 50px;
+    line-height: 55px;
+    font-size: 100px; text-align: center; color: #fff;
+    top: 50%; left: 50px; z-index: 4; margin-top: -25px;
+    cursor: pointer; opacity: 0; transition: all 150ms;
+}
+.fader .next { left: auto; right: 50px; }
+.banner:hover .fader_controls .page.prev { opacity: 0.5; left: 0 }
+.banner:hover .fader_controls .page.next { opacity: 0.5; right: 0 }
+.imginfo {
+    z-index: 9;
+    position: absolute;
+    font-size: 20px; color: #FFF; background: #00000061;
+    display: block; overflow: hidden;
+    bottom: 12%; left: 0; right: 0;
+    padding: 0 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/*toppic*/
+.toppic { width: 35%; height: 100%; float: right; overflow: hidden; position: relative; background-color: white;}
+.toppic h3{font-size: 25px;text-indent: 20px;height: 50px;line-height: 50px;}
+.toppic_list{width: 100%;overflow: hidden;}
+.toppic_list li{width: 85%; height: 50px;float: left;}
+.toppic_rank{width: 15%;height: 50px;float: left;line-height: 50px;text-align: center;font-size: 20px;background-color: chocolate;}
+.toppic_info div{height: 25px;width: 100%;}
+.toppic_title a{display: block;text-indent: 10px;font-size: 20px;}
+.toppic_read span{font-size: 14px;height: 25px;line-height: 25px;float: left;}
+.img_view{background: rgba(0,0,0,0) url(../images/newsbg04.png) no-repeat center;z-index: 90;width: 10%;}
+.toppic_auther{width: 50%;text-indent: 20px;}
+.toppic_view{width: 20%;}
+/*blogsbox*/
+.blogsbox { width: 60%; overflow: hidden; float: left;}
+.blogs {
+    overflow: hidden;
+    margin-bottom: 20px;
+    height: 100%;height: 120px;
+    border-radius: 5px;
+    background: #FFF;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); -moz-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+    box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+    -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; -o-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+.blogs .blogtitle { width: 100%;height: 40px; font-size: 20px; overflow: hidden;text-overflow: ellipsis;text-indent: 20px;line-height: 40px;}
+.blogs .blogtitle a:hover { color: #337ab7; }
+.blogs .blogpic { float: left; width: 80px; height: 80px; margin-left: 10px; border-radius: 50%; display: block; overflow: hidden;}
+.blogs .blogpic img {
+    width: 100%; height: 100%;
+    -webkit-transition: all 0.6s ease; -moz-transition: all 0.6s ease; -o-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+.blogs .blogpic :hover img { transform: scale(1.1) }
+.bloginfo { width: 80%;height: 80px;float: left;margin-left: 10px;}
+.bloginfo .blogtext {
+    margin-top: 5px;
+    height: 55%;
+    font-size: 14px; color: #566573; text-indent:2em;line-height: 1.5;
+    overflow: hidden; text-overflow: ellipsis;
+}
+.bloginfo .blogtext a:hover { color: rgba(0,0,0,0.5); }
+.bloginfo ul{margin-left: 20px;margin-top: 5px;}
+.bloginfo ul li { float: left; font-size: 12px; padding: 0 0 0 20px; margin: 0 20px 0 0; color: #748594; line-height: 1.5; display: inline-block; }
+.bloginfo ul li a { color: #748594; }
+.bloginfo ul li a:hover { color: #000 }
+.bloginfo .author { background: url(../images/auicon.jpg) no-repeat 0 0 }
+.bloginfo .comment { background: url(../images/auicon.jpg) no-repeat top -23px left; }
+.bloginfo .timer { background: url(../images/auicon.jpg) no-repeat top -44px left; }
+.bloginfo .view { background: url(../images/auicon.jpg) no-repeat top -64px left; }
+.bloginfo .like { background: url(../images/auicon.jpg) no-repeat top -85px left; }
+
+/*sidebar*/
+.sidebar { width: 35%; overflow: hidden; float: right }
+.sidebar div { padding: 35px 30px; margin-bottom: 20px; background: #FFF; -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); -moz-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1); }
+.hometitle { font-size: 18px; color: #282828; font-weight: 600; margin: 0; text-transform: uppercase; padding-bottom: 15px; margin-bottom: 25px; position: relative; }
+.hometitle:after { content: ""; background-color: #282828; left: 0; width: 50px; height: 2px; bottom: 0; position: absolute; -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s; }
+.sidebar div:hover ::after { width: 70px; }
+
+
+/*cd-top*/
+.cd-top {
+    display: inline-block;
+    height: 40px; width: 40px;
+    position: fixed; bottom: 40px; right: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden; text-indent: 100%; white-space: nowrap;
+    background: rgba(0, 0, 0, 0.8) url(../images/top.png) no-repeat center ;
+    visibility: hidden; opacity: 0;
+    -webkit-transition: all 0.3s; -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
