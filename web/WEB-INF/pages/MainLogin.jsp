@@ -12,9 +12,10 @@
 <head>
     <meta charset="UTF-8">
     <title>火星博客登录</title>
-    <link href="../../static/css/base.css" rel="stylesheet">
-    <link href="../../static/css/login.css" rel="stylesheet">
-    <script type="text/javascript" src="../../static/js/base.js" ></script>
+    <c:set value="${pageContext.request.contextPath}" var="path" scope="page"/>
+    <link href="${path}/static/css/base.css" rel="stylesheet">
+    <link href="${path}/static/css/login.css" rel="stylesheet">
+    <script type="text/javascript" src="${path}/static/js/base.js" ></script>
 </head>
 <body>
 <header>
@@ -48,11 +49,11 @@
         <div class="personal_center">
             <a class="writeBlog" href="writeBlog.jsp">创作中心</a>
             <c:if test="${user==null}">
-                <a class="logandregist" href="${pageContext.request.contextPath}/RegisterUIServlet" target="_blank">注册/登陆</a>
+                <a class="logandregist" href="${path}/RegisterUIServlet" target="_blank">注册/登陆</a>
             </c:if>
             <c:if test="${user!=null}">
                 <div class="about">
-                    <a href="persionalInform.jsp" ><img class="personal_image" src="images/<c:out value='${user.image}' />" alt=""></a>
+                    <a href="persionalInform.jsp" ><img class="personal_image" src="${path}/static/images/<c:out value='${user.image}' />" alt=""></a>
                 </div>
             </c:if>
         </div>
