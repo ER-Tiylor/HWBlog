@@ -8,13 +8,18 @@ package xyz.huowang.hwblog.domain;
  */
 public class User {
     private String userID;//用户ID
+    private String userIP;//用户IP
     private String userName;//用户名
+    private String userNickName;//用户昵称
     private String userPassWord;//用户密码
-    private String userSex;//用户性别
     private String userTelNum;//用户电话号
     private String userEmail;//用户邮箱
     private String userBirthday;//用户生日
-    private String userFlag;//用户登录状态
+    private String userRight;//用户权限
+    private String userRegisterTime;//注册时间
+    private String userIntroduction;//用户简介
+    private String userHeadImage;//用户头像
+    private String userGender;//用户性别
 
     public String getUserID() {
         return userID;
@@ -22,23 +27,29 @@ public class User {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+    public String getUserIP() {
+        return userIP;
+    }
+    public void setUserIP(String userIP) {
+        this.userIP = userIP;
+    }
     public String getUserName() {
         return userName;
     }
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    public String getUserNickName() {
+        return userNickName;
+    }
+    public void setUserNickName(String userNickName) {
+        this.userNickName = userNickName;
+    }
     public String getUserPassWord() {
         return userPassWord;
     }
     public void setUserPassWord(String userPassWord) {
         this.userPassWord = userPassWord;
-    }
-    public String getUserSex() {
-        return userSex;
-    }
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
     }
     public String getUserTelNum() {
         return userTelNum;
@@ -58,37 +69,34 @@ public class User {
     public void setUserBirthday(String userBirthday) {
         this.userBirthday = userBirthday;
     }
-    public String getUserFlag() {
-        return userFlag;
+    public String getUserRight() {
+        return userRight;
     }
-    public void setUserFlag(String userFlag) {
-        this.userFlag = userFlag;
+    public void setUserRight(String userRight) {
+        this.userRight = userRight;
     }
-    public User(String userID, String userName, String userPassWord, String userSex, String userTelNum, String userEmail, String userBirthday, String userFlag) {
-        this.userID = userID;
-        this.userName = userName;
-        this.userPassWord = userPassWord;
-        this.userSex = userSex;
-        this.userTelNum = userTelNum;
-        this.userEmail = userEmail;
-        this.userBirthday = userBirthday;
-        this.userFlag = userFlag;
+    public String getUserRegisterTime() {
+        return userRegisterTime;
     }
-
-    public User() {
-        super();
+    public void setUserRegisterTime(String userRegisterTime) {
+        this.userRegisterTime = userRegisterTime;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID='" + userID + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userSex='" + userSex + '\'' +
-                ", userTelNum='" + userTelNum + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userBirthday='" + userBirthday + '\'' +
-                ", userFlag='" + userFlag + '\'' +
-                '}';
+    public String getUserIntroduction() {
+        return userIntroduction;
+    }
+    public void setUserIntroduction(String userIntroduction) {
+        this.userIntroduction = userIntroduction;
+    }
+    public String getUserHeadImage() {
+        return userHeadImage;
+    }
+    public void setUserHeadImage(String userHeadImage) {
+        this.userHeadImage = userHeadImage;
+    }
+    public String getUserGender() {
+        return userGender;
+    }
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 }

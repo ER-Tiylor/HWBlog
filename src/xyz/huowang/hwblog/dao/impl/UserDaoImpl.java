@@ -70,14 +70,19 @@ public class UserDaoImpl implements IUserDao {
     public User sqlToUser(ResultSet rs) throws Exception{
         User user = new User();
         while(rs.next()!=false){
-            user.setUserID(rs.getString("userid"));
-            user.setUserSex(rs.getString("usersex"));
-            user.setUserName(rs.getString("username"));
-            user.setUserEmail(rs.getString("useremail"));
-            user.setUserTelNum(rs.getString("usertelnum"));
-            user.setUserFlag(rs.getString("userloginflag"));
-            user.setUserPassWord(rs.getString("userpassword"));
-            user.setUserBirthday(rs.getString("userbirthday"));
+            user.setUserID(rs.getString("user_id"));
+            user.setUserIP(rs.getString("user_ip"));
+            user.setUserRight(rs.getString("right_id"));
+            user.setUserName(rs.getString("user_name"));
+            user.setUserEmail(rs.getString("user_email"));
+            user.setUserGender(rs.getString("user_gender"));
+            user.setUserHeadImage(rs.getString("user_icon"));
+            user.setUserNickName(rs.getString("user_nickname"));
+            user.setUserPassWord(rs.getString("user_password"));
+            user.setUserBirthday(rs.getString("user_birthday"));
+            user.setUserTelNum(rs.getString("user_telphone_number"));
+            user.setUserIntroduction(rs.getString("user_introduction"));
+            user.setUserRegisterTime(rs.getString("user_register_time"));
         }
         return user;
     }
