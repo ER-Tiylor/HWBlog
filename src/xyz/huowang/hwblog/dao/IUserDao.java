@@ -17,7 +17,23 @@ public interface IUserDao {
      * @return:
      * @throws:
      */
-    User findUser(String userName, String passWord) throws Exception;
+    User userLogin(String userName, String passWord) throws Exception;
+
+    /**
+     * 添加用户
+     * @param: user
+     * @return:  int
+     * @throws: Exception
+     */
+    int addUser(User user) throws Exception;
+
+    /**
+     * 用于用户注册
+     * @param: user
+     * @return:  int
+     * @throws: Exception
+     */
+    int saveUser(User user) throws Exception;
 
     /**
      * 根据用户名查找用户
@@ -25,7 +41,24 @@ public interface IUserDao {
      * @return:  用户对象
      * @throws:
      */
-    User findUser(String userName) throws Exception;
+    void deleteUser(String userName) throws Exception;
+
+    /**
+     * 修改用户信息（需要传入两个参数）
+     * @param: username 用户名
+     * @param: password 密码
+     * @return:  用户对象
+     * @throws: SQLException
+     */
+    int updateUser(User user) throws Exception;
+
+    /**
+     * 查询用户信息（需要传入两个参数）
+     * @param: userID 用户ID
+     * @return:  用户对象
+     * @throws: Exception
+     */
+    User queryUser(String userID) throws Exception;
 
     /**
      * 根据邮箱查看用户是否已经注册
@@ -34,14 +67,6 @@ public interface IUserDao {
      * @throws:
      */
     User isExist(String email) throws Exception;
-
-    /**
-     * 用于用户注册
-     * @param: user
-     * @return:  int
-     * @throws: SQLException
-     */
-    int addUser(User user) throws Exception;
 
 
 }

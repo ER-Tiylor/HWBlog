@@ -1,6 +1,6 @@
 header { position: fixed; top: 0; z-index: 100}
-article { width: 1000px; margin: 150px auto 0; overflow: hidden;}
-.nav { background-color: rgba(255,255,255,0.9);}
+article { width: 1000px; margin: 120px auto 0; overflow: hidden;}
+.nav { background-color: rgba(255,255,255,1);}
 /*article*/
 .picsbox { width: 100%;height: 350px; overflow: hidden;}
 /*toppic*/

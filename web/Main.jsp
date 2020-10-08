@@ -55,7 +55,7 @@
                     </c:if>
                     <c:if test="${user!=null}">
                         <div class="about">
-                            <a href="persionalInform.jsp" ><img class="personal_image" src="images/<c:out value='${user.image}' />" alt=""></a>
+                            <a href="" ><img class="personal_image" src="static/images/avatar.jpg" alt=""></a>
                         </div>
                     </c:if>
                 </div>

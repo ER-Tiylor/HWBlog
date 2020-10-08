@@ -1,6 +1,6 @@
 ﻿window.onload=function(){
     var aLi=document.getElementsByTagName('li');
-    console.log(aLi);
+
     for(var i=0; i<aLi.length; i++){
         aLi[i].onmouseover=function(){
             var subnav=this.getElementsByTagName('ul')[0];

@@ -44,8 +44,6 @@ public class RegisterServlet extends HttpServlet {
                 service.registerUser(user);
                 request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
             } catch (Exception e) {
-                request.setAttribute("message", ErrorConstant.REGISTER_DEFEAT);
-                request.getRequestDispatcher("/message.jsp").forward(request, response);
                 e.printStackTrace();
                 log.error(e.toString()+user.toString()+ErrorConstant.REGISTER_DEFEAT);
             }
@@ -53,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
             //将封装了用户填写的表单数据的formbean对象发送回register.jsp页面的form表单中进行显示
             request.setAttribute(Constant.MESSAGE, formbean);
             //校验失败就说明是用户填写的表单数据有问题，那么就跳转回register.jsp
-            request.getRequestDispatcher("/WEB-INF/pages/Register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
             log.warn(formbean.toString());
         }
     }

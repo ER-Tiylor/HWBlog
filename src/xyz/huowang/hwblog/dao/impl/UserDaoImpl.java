@@ -19,12 +19,13 @@ public class UserDaoImpl implements IUserDao {
     public static Logger log= Logger.getLogger(UserDaoImpl.class);
     JdbcUtils connect = new JdbcUtils();
     User user = new User();
+
     @Override
-    public User findUser(String userName, String passWord) throws Exception {
+    public User userLogin(String userName, String passWord) throws Exception {
         String sql = "SELECT * " +
-                "FROM hwblog_user " +
-                "WHERE username = '"+userName+"' AND "
-                + "userpassword ='"+passWord+"'";
+                "FROM hwblog_users " +
+                "WHERE user_nickname = '"+userName+"' AND "
+                + "user_password ='"+passWord+"'";
 
         ResultSet rs = connect.Query(sql);
         user = sqlToUser(rs);
@@ -32,35 +33,56 @@ public class UserDaoImpl implements IUserDao {
         return user;
     }
 
-    @Override
-    public User findUser(String userName) throws Exception {
-        String sql = "SELECT * " +
-                "FROM hwblog_user " +
-                "WHERE username ='"+userName+"'";
-        ResultSet rs = connect.Query(sql);
-        user = sqlToUser(rs);
-        connect.closeSource();
-        return user;
-    }
 
     @Override
     public int addUser(User user) throws Exception {
-        String sql = "insert into hwblog_user(`userid`,`username`,`userpassword`,`userbirthday`,`useremail`)" +
+        String sql = "insert into hwblog_users(`user_id`,`user_ip`,`user_nickname`,`user_password`,`user_email`,`user_register_time`,`right_id`)" +
                 " values('"+user.getUserID()+"','"+
-                user.getUserName()+"','"+
+                user.getUserIP()+"','"+
+                user.getUserNickName()+"','"+
                 user.getUserPassWord()+"','"+
-                user.getUserBirthday()+"','"+
-                user.getUserEmail()+"')";
+                user.getUserEmail()+"','"+
+                user.getUserRegisterTime()+"','"+
+                user.getUserRight()+"')";
         connect.Update(sql);
         connect.closeSource();
         return 0;
     }
 
     @Override
+    public int saveUser(User user) throws Exception {
+        String sql = "insert into hwblog_users(`user_id`,`user_nickname`,`user_name`,`user_password`,`user_email`,`user_register_time`,`right_id`)" +
+                " values('"+user.getUserID()+"','"+
+                user.getUserNickName()+"','"+
+                user.getUserName()+"','"+
+                user.getUserPassWord()+"','"+
+                user.getUserEmail()+"','"+
+                user.getUserRegisterTime()+"','"+
+                user.getUserRight()+"')";
+        connect.Update(sql);
+        connect.closeSource();
+        return 0;
+    }
+    @Override
+    public void deleteUser(String userName) throws Exception {
+
+    }
+
+    @Override
+    public int updateUser(User user) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public User queryUser(String userID) throws Exception {
+        return null;
+    }
+
+    @Override
     public User isExist(String email) throws Exception{
         String sql = "SELECT * " +
-                "FROM hwblog_user " +
-                "WHERE useremail = '"+email+"'";
+                "FROM hwblog_users " +
+                "WHERE user_email = '"+email+"'";
         ResultSet rs = connect.Query(sql);
         user = sqlToUser(rs);
         connect.closeSource();

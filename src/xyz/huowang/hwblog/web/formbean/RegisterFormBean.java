@@ -21,18 +21,19 @@ import java.util.Map;
 public class RegisterFormBean {
 
     public static Logger log= Logger.getLogger(RegisterFormBean.class);
-    //RegisterFormBean中的属性与register.jsp中的表单输入项的name一一对应
-    private String userName;
+    //RegisterFormBean中的属性与jsp中的表单输入项的name一一对应
+    private String userNickName;
     private String userPassWord;
     private String confirmPwd;
     private String userEmail;
-    private String userBirthday;
+    private String userRegisterTime;
+    private String userRight;
 
-    public String getUserName() {
-        return userName;
+    public String getUserNickName() {
+        return userNickName;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserNickName(String userNickName) {
+        this.userNickName = userNickName;
     }
     public String getUserPassWord() {
         return userPassWord;
@@ -52,11 +53,17 @@ public class RegisterFormBean {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-    public String getUserBirthday() {
-        return userBirthday;
+    public String getUserRegisterTime() {
+        return userRegisterTime;
     }
-    public void setUserBirthday(String userBirthday) {
-        this.userBirthday = userBirthday;
+    public void setUserRegisterTime(String userRegisterTime) {
+        this.userRegisterTime = userRegisterTime;
+    }
+    public String getUserRight() {
+        return userRight;
+    }
+    public void setUserRight(String userRight) {
+        this.userRight = userRight;
     }
 
     /**
@@ -78,10 +85,10 @@ public class RegisterFormBean {
 
     public boolean validate() {
         boolean isOk = true;
-        if (BaseUtil.isNullOrEmpty(this.userName)) {
+        if (BaseUtil.isNullOrEmpty(this.userNickName)) {
             isOk = false;
             errors.put(Constant.USERNAME, "用户名不能为空！！");
-        }else if(!WebUtils.checkName(this.userName)){
+        }else if(!WebUtils.checkName(this.userNickName)){
             errors.put(Constant.USERNAME, "用户名不符合要求！！");
         }
 
@@ -108,10 +115,6 @@ public class RegisterFormBean {
             errors.put(Constant.USEREMAIL, "邮箱不是一个合法邮箱！！");
         }
 
-        if(BaseUtil.isNullOrEmpty(this.userBirthday)){
-            isOk = false;
-            errors.put(Constant.USERBIRTHDAY, "出生日期不能为空！！");
-        }
 
         if(!isOk){
             log.warn(ErrorConstant.PLEASE_CHECK_INPUT);

@@ -99,4 +99,25 @@ public class User {
     public void setUserGender(String userGender) {
         this.userGender = userGender;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID='" + userID + '\'' +
+                ", userIP='" + userIP + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userNickName='" + userNickName + '\'' +
+                ", userPassWord='" + userPassWord + '\'' +
+                ", userTelNum='" + userTelNum + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userBirthday='" + userBirthday + '\'' +
+                ", userRight='" + userRight + '\'' +
+                ", userRegisterTime='" + userRegisterTime + '\'' +
+                ", userIntroduction='" + userIntroduction + '\'' +
+                ", userHeadImage='" + userHeadImage + '\'' +
+                ", userGender='" + userGender + '\'' +
+                '}';
+    }
+
+
 }

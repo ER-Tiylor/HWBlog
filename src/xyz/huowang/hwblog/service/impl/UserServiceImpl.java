@@ -21,7 +21,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void registerUser(User user) throws Exception {
         if(BaseUtil.isNullOrEmpty(userDao.isExist(user.getUserEmail()).getUserID())){
-            userDao.addUser(user);
+            userDao.saveUser(user);
         }else{
             throw new Exception(ErrorConstant.REGISTER_USER_ALREADY_EXIST);
         }
@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User loginUser(String userName,String userPwd) throws Exception {
         User user = null;
-        user = userDao.findUser(userName,userPwd);
+        user = userDao.userLogin(userName,userPwd);
         if(BaseUtil.isNullOrEmpty(user.getUserID())){
             throw new Exception(ErrorConstant.REGISTER_USER_NOT_EXIST);
         }

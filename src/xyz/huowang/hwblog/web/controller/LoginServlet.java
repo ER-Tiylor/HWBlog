@@ -41,8 +41,6 @@ public class LoginServlet extends HttpServlet {
                 log.info(user.toString());
                 request.getRequestDispatcher("/Main.jsp").forward(request, response);
             } catch (Exception e) {
-                request.setAttribute("message", ErrorConstant.LOGIN_DEFEAT);
-                request.getRequestDispatcher("/message.jsp").forward(request, response);
                 e.printStackTrace();
                 log.error(e.toString()+ErrorConstant.LOGIN_DEFEAT);
             }

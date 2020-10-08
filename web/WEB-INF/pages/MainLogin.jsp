@@ -53,7 +53,7 @@
             </c:if>
             <c:if test="${user!=null}">
                 <div class="about">
-                    <a href="persionalInform.jsp" ><img class="personal_image" src="${path}/static/images/<c:out value='${user.image}' />" alt=""></a>
+                    <a href="" ><img class="personal_image" src="static/images/avatar.jpg" alt=""></a>
                 </div>
             </c:if>
         </div>
@@ -72,20 +72,20 @@
                 <form action="${pageContext.request.contextPath }/LoginServlet" method="post">
                     <span>登录</span>
                     <input type="text" name="userName" class="input name" placeholder="请输入用户名"/>
-                    <input type="text" name="userPassWord" class="input password" placeholder="请输入密码"/>
-                    <input type="text" name="" class="input code" placeholder="请输入验证码"/>
-                    <input type="button" name="" class="input btn" id="login_btn" onclick="" value="登录"/>
+                    <input type="password" name="userPassWord" class="input password" placeholder="请输入密码"/>
+                    <input type="text" name="" class="input code" placeholder="请输入验证码"/><img id="Verification_Image" src="${path}/static/images/check.jpg" οnclick="refresh()">
+                    <input type="submit" name="" class="input btn" id="login_btn" onclick="" value="登录"/>
                 </form>
             </div>
 
             <div class="regist panel" id="regist">
-                <form action="${pageContext.request.contextPath}/RegisterUIServlet" method="post">
+                <form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
                     <span>注册</span>
                     <input type="text" name="userEmail" class="input email" placeholder="请输入邮箱"/>
-                    <input type="text" name="userName" class="input name" placeholder="请输入用户名"/>
-                    <input type="text" name="userPassWord" class="input password" placeholder="请输入密码"/>
-                    <input type="text" name="confirmPwd" class="input cofpassword" placeholder="请确认密码"/>
-                    <input type="button" class="input btn" id="regist_btn" onclick="" value="注册"/>
+                    <input type="text" name="userNickName" class="input name" placeholder="请输入用户名"/>
+                    <input type="password" name="userPassWord" class="input password" placeholder="请输入密码"/>
+                    <input type="password" name="confirmPwd" class="input cofpassword" placeholder="请确认密码"/>
+                    <input type="submit" class="input btn" id="regist_btn" onclick="" value="注册"/>
                 </form>
             </div>
 

@@ -52,7 +52,12 @@ public class WebUtils {
     public static User copyFormToUser(RegisterFormBean formbean, User user){
         try {
             BeanUtils.copyProperties(user, formbean);//填入用户数输入的数据
-            user.setUserID(WebUtils.makeUserId());//设置用户的Id属性
+            String userID = WebUtils.makeUserId();
+            String userName = "HXWM"+userID.substring(4);
+            user.setUserID(userID);//设置用户的Id属性
+            user.setUserRegisterTime(BaseUtil.getDate());
+            user.setUserName(userName);
+            user.setUserRight("1");
         } catch (IllegalAccessException e) {
             log.error(e.toString());
             e.printStackTrace();
@@ -97,7 +102,6 @@ public class WebUtils {
         String str = millis + String.format("%03d", end3);
         return str;
     }
-
     /**
      * 生成UUID
      * @return
@@ -159,4 +163,13 @@ public class WebUtils {
         }
         return false;
     }
+
+    /**
+     * 生成验证码（）
+     * @param: username 用户名
+     * @param: password 密码
+     * @return:  用户对象
+     * @throws: SQLException
+     */
+
 }
