@@ -27,6 +27,20 @@
     }
 
 }
+function checkboxOnclick(checkbox){
+    var check = document.getElementById("regist_btn");
+    if ( checkbox.checked == true){
+        //Action for checked
+        //check.setAttribute("disabled", true);
+        check.disabled = false;
+        check.style.backgroundColor = "#00A7EB";
+    }else{
+        //Action for not checked
+        //check.setAttribute("disabled", false);
+        check.disabled = true;
+        check.style.backgroundColor = "grey";
+    }
+}
 function login(){
     var login = document.getElementById("login");
     var register = document.getElementById("regist");

@@ -25,14 +25,14 @@
                 <div class="logo"><a href="persional.jsp">HW博客<img src=""></a></div>
                 <!--list begin-->
                 <ul class="menu_nav_list" id="menu_nav_list">
-                    <li><a href="mainPage.jsp">火网首页</a> </li>
-                    <li><a href="persionalInform.jsp">火星论坛</a> </li>
-                    <li><a href="manageBlog.jsp">火星资源</a></li>
-                    <li><a href="writeBlog.jsp">火网中心</a>
+                    <li><a href="#">火网首页</a> </li>
+                    <li><a href="#">火星论坛</a> </li>
+                    <li><a href="#">火星资源</a></li>
+                    <li><a href="#">火网中心</a>
                         <ul class="sub_nav" id="sub_nav">
-                            <li><a href="share.html">个人博客</a></li>
-                            <li><a href="share.html">创作中心</a></li>
-                            <li><a href="share.html">收藏</a></li>
+                            <li><a href="#">个人博客</a></li>
+                            <li><a href="#">创作中心</a></li>
+                            <li><a href="#">收藏</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -49,15 +49,24 @@
 
                 <!--personal center begin-->
                 <div class="personal_center">
-                    <a class="writeBlog" href="writeBlog.jsp">创作中心</a>
-                    <c:if test="${user==null}">
-                        <a class="logandregist" href="${pageContext.request.contextPath}/MainLoginUIServlet" target="_blank">注册/登陆</a>
-                    </c:if>
-                    <c:if test="${user!=null}">
-                        <div class="about">
-                            <a href="" ><img class="personal_image" src="static/images/avatar.jpg" alt=""></a>
-                        </div>
-                    </c:if>
+                    <a class="writeBlog" href="#">创作中心</a>
+                    <div class="about">
+                        <c:if test="${user!=null}">
+                            <ul class="personal_nav" id="">
+                                <li><a href="persionalInform.jsp" ><img class="personal_image" src="images/avatar.jpg' />" alt=""></a>
+                                    <ul class="personal_sub_nav" id="personal_nav">
+                                        <li><a href="#">个人中心</a></li>
+                                        <li class="personal_sub_nav_splid"><a href="#">我的关注</a></li>
+                                        <li><a href="#">我的收藏</a></li>
+                                        <li class="personal_sub_nav_splid"><a href="#">退出登录</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </c:if>
+                        <c:if test="${user==null}">
+                            <a class="logandregist" href="${pageContext.request.contextPath}/MainLoginUIServlet" target="_blank">注册/登陆</a>
+                        </c:if>
+                    </div>
                 </div>
                 <!--personal center end-->
             </nav>
@@ -70,7 +79,7 @@
             <!--slideshow begin-->
             <div class="banner">
                 <div id="banner" class="fader">
-                    <li class="slide" ><a href="/" target="_blank">
+                    <li class="slide" ><a href="#" target="_blank">
                         <img src="static/images/banner01.jpg"><span class="imginfo">即以背影赢了天下，为何回头乱了芳华</span></a>
                     </li>
                     <div class="fader_controls">
@@ -86,7 +95,7 @@
                     <span class="toppic_rank">1</span>
                     <li class="toppic_info">
                         <div class="toppic_title">
-                            <a href="/" title="">PHP安装配置</a>
+                            <a href="#" title="">PHP安装配置</a>
                         </div>
                         <div class="toppic_read">
                             <span class="toppic_auther">HW</span>

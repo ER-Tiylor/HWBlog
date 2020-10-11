@@ -21,10 +21,10 @@ public class UserDaoImpl implements IUserDao {
     User user = new User();
 
     @Override
-    public User userLogin(String userName, String passWord) throws Exception {
+    public User userLogin(String userEmail, String passWord) throws Exception {
         String sql = "SELECT * " +
                 "FROM hwblog_users " +
-                "WHERE user_nickname = '"+userName+"' AND "
+                "WHERE user_email = '"+userEmail+"' AND "
                 + "user_password ='"+passWord+"'";
 
         ResultSet rs = connect.Query(sql);

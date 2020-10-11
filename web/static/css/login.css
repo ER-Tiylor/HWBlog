@@ -2,10 +2,16 @@ footer{position: fixed; bottom: 0; z-index: 100}
 body{background: rgba(0,0,0,0.1) url(../images/6.jpg) no-repeat center;}
 .main{
 	width: 750px;height: 460px;
-	margin: 30px auto;
+	margin: 50px auto;
 	background-color: rgba(255,255,255,0.1);
 }
 .left{width: 40%;height: 100%;background-color: rgba(0,0,0,0.5);float: left;}
+.saying{
+	margin-top: 50px;
+	text-align: center;
+	line-height: 1.5;
+	color: white;font-size: 20px;
+}
 .choose{width: 100%; height: 10%;float: left;}
 .right{width: 60%;height: 100%;float: left;}
 .choose_btn{
@@ -18,13 +24,19 @@ body{background: rgba(0,0,0,0.1) url(../images/6.jpg) no-repeat center;}
 	width: 100%;height: 90%;
 	background-color: white;
 	float: left;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 .choose_login{background-color: white;border-top-left-radius: 5px;}
 .choose_regist{background-color: darkgray;border-top-right-radius: 5px;}
 .login{display: block;}
 .regist{display: none;}
-.right span{font-size: 30px;text-align: center;width: 100%;height: 50px; display: block;line-height: 50px;}
 .input{width: 350px;height: 50px;line-height: 50px; margin: 5px 50px;float: left;border-bottom: 1px solid #D2691E ;text-indent: 15px;font-size: 18px;}
-.btn{border: none;margin-top:30px;border-radius: 10px;background-color: #00A7EB;font-size: 25px;color: white;}
-.code{width: 250px;height: 50px;margin: 5px 0px 5px 50px;}
-
+.btn{border: none;margin-top:30px;border-radius: 10px;font-size: 25px;color: white;}
+.regist_btn{margin-top:10px;background-color: grey;}
+.login_btn{margin-top:10px;background-color: #00A7EB;}
+.code{width: 220px;height: 50px;margin: 5px 0px 5px 50px;}
+.ver_img{float: left;display: block;width: 110px;height: 50px;margin-left: 20px;margin-top: 5px;}
+.regist_notice{float: left;width: 350px;height: 25px; margin: 5px 50px;line-height: 100%;font-size: 14px;}
+.login_notice{float: left;width: 350px;height: 50px; margin: 5px 50px;line-height: 50px;font-size: 14px;}
+.goLogin{float: right;}

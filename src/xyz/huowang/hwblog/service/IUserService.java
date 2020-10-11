@@ -18,9 +18,9 @@ public interface IUserService {
     void registerUser(User user) throws Exception;
     /**
      * 提供登录服务
-     * @param userName
+     * @param userEmail
      * @param userPwd
      * @return
      */
-    User loginUser(String userName,String userPwd) throws Exception;
+    User loginUser(String userEmail,String userPwd) throws Exception;
 }

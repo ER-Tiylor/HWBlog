@@ -28,9 +28,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User loginUser(String userName,String userPwd) throws Exception {
+    public User loginUser(String userEmail,String userPwd) throws Exception {
         User user = null;
-        user = userDao.userLogin(userName,userPwd);
+        user = userDao.userLogin(userEmail,userPwd);
         if(BaseUtil.isNullOrEmpty(user.getUserID())){
             throw new Exception(ErrorConstant.REGISTER_USER_NOT_EXIST);
         }

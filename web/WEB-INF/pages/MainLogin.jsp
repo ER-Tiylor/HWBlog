@@ -19,50 +19,10 @@
 </head>
 <body>
 <header>
-    <nav class="nav" id="topnav">
-        <div class="logo"><a href="persional.jsp">HW博客<img src=""></a></div>
-        <!--list begin-->
-        <ul class="menu_nav_list" id="menu_nav_list">
-            <li><a href="mainPage.jsp">火网首页</a> </li>
-            <li><a href="persionalInform.jsp">火星论坛</a> </li>
-            <li><a href="manageBlog.jsp">火星资源</a></li>
-            <li><a href="writeBlog.jsp">火网中心</a>
-                <ul class="sub_nav" id="sub_nav">
-                    <li><a href="share.html">个人博客</a></li>
-                    <li><a href="share.html">创作中心</a></li>
-                    <li><a href="share.html">收藏</a></li>
-                </ul>
-            </li>
-        </ul>
-        <!--list end-->
-
-        <!--search begin-->
-        <div id="search_bar" class="search_bar">
-            <form  id="searchform" action="search.jsp" method="post" name="searchform">
-                <input class="input_search" placeholder="想搜点什么呢..." type="text" name="keyboard" id="keyboard" />
-                <span class="search_ico"></span>
-            </form>
-        </div>
-        <!--search end-->
-
-        <!--personal center begin-->
-        <div class="personal_center">
-            <a class="writeBlog" href="writeBlog.jsp">创作中心</a>
-            <c:if test="${user==null}">
-                <a class="logandregist" href="${path}/RegisterUIServlet" target="_blank">注册/登陆</a>
-            </c:if>
-            <c:if test="${user!=null}">
-                <div class="about">
-                    <a href="" ><img class="personal_image" src="static/images/avatar.jpg" alt=""></a>
-                </div>
-            </c:if>
-        </div>
-        <!--personal center end-->
-    </nav>
 </header>
 <article>
     <div class="main">
-        <div class="left"><p></p></div>
+        <div class="left"><p class="saying">晚来天欲雪，能饮一杯无</p></div>
         <div class="right">
             <div class="choose">
                 <input class="choose_login choose_btn" id="choose_login" type="button" value="登录" onclick="login();"/>
@@ -70,25 +30,29 @@
             </div>
             <div class="login panel" id="login">
                 <form action="${pageContext.request.contextPath }/LoginServlet" method="post">
-                    <span>登录</span>
-                    <input type="text" name="userName" class="input name" placeholder="请输入用户名"/>
+                    <span class="error"></span>
+                    <input type="text" name="userEmail" class="input name" placeholder="请输入邮箱"/>
                     <input type="password" name="userPassWord" class="input password" placeholder="请输入密码"/>
-                    <input type="text" name="" class="input code" placeholder="请输入验证码"/><img id="Verification_Image" src="${path}/static/images/check.jpg" οnclick="refresh()">
-                    <input type="submit" name="" class="input btn" id="login_btn" onclick="" value="登录"/>
+                    <input type="text" name="verCode" class="input code" placeholder="请输入验证码"/><img class="ver_img" id="Ver_login_Image" src="${path}/user/check.jpg" οnclick="refresh()">
+                    <div class="login_notice">没有账号？<a href="javascript:register();">去注册</a></div>
+                    <input type="submit" name="" class="input btn login_btn" id="login_btn" onclick="" value="登录"/>
                 </form>
             </div>
 
             <div class="regist panel" id="regist">
-                <form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
-                    <span>注册</span>
+                <form action="${pageContext.request.contextPath }/RegisterServlet" method="post">
+                    <span class="error" ></span>
                     <input type="text" name="userEmail" class="input email" placeholder="请输入邮箱"/>
-                    <input type="text" name="userNickName" class="input name" placeholder="请输入用户名"/>
                     <input type="password" name="userPassWord" class="input password" placeholder="请输入密码"/>
                     <input type="password" name="confirmPwd" class="input cofpassword" placeholder="请确认密码"/>
-                    <input type="submit" class="input btn" id="regist_btn" onclick="" value="注册"/>
+                    <input type="text" name="verCode" class="input code" placeholder="请输入验证码"/><img class="ver_img" id="Ver_regist_Image" src="${path}/user/check.jpg" οnclick="refresh()">
+                    <div class="regist_notice">
+                        <input type="checkbox" name="agreement" class="agreement" id="agreement" onchange="checkboxOnclick(this)" /><a href="#">同意协议</a>
+                        <div class="goLogin">已有账号？<a href="javascript:login();">去登录</a></div>
+                    </div>
+                    <input type="submit" class="input btn regist_btn" id="regist_btn" onclick="" disabled="disabled"  value="注册"/>
                 </form>
             </div>
-
         </div>
     </div>
 </article>

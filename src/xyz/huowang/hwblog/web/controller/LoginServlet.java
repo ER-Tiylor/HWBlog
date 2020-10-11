@@ -25,7 +25,9 @@ public class LoginServlet extends HttpServlet {
 
     public static Logger log= Logger.getLogger(LoginServlet.class);
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
+    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
         //获取用户填写的登录信息
         LoginFormBean formbean = WebUtils.requestBean(request, LoginFormBean.class);
@@ -35,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             IUserService service = new UserServiceImpl();
             //调用service层提供的注册用户服务实现用户注册
             try {
-                user = service.loginUser(user.getUserName(),user.getUserPassWord());
+                user = service.loginUser(user.getUserEmail(),user.getUserPassWord());
                 //登录成功后，就将用户存储到session中
                 request.getSession().setAttribute(Constant.USER, user);
                 log.info(user.toString());
@@ -51,9 +53,5 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/pages/MainLogin.jsp").forward(request, response);
             log.warn(formbean.toString());
         }
-
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }
