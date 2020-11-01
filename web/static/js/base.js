@@ -61,3 +61,27 @@ function register(){
     register.style.display = "block";
     btn_reg.style.backgroundColor = "white";
 }
+function saveInf(){
+    var form1 = document.getElementById("form1");
+    var transBtn = document.getElementById("mod_btn");
+    var personInput = document.getElementsByClassName("person_input");
+    var introduceInf1 = document.getElementById("introduce_inf1");
+    var introduceInf2 = document.getElementById("introduce_inf2");
+    var showSex = document.getElementById("sex_show");
+    var sexChoose = document.getElementsByClassName("sex_choose");
+
+    if(transBtn.value=="修改信息"){
+        introduceInf1.style.display = "none";
+        introduceInf2.style.display = "block";
+        transBtn.value = "保存信息";
+        sexChoose[0].style.display = "block";
+        sexChoose[1].style.display = "block";
+        showSex.style.display = "none";
+        for (var i=0;i<personInput.length;i++)
+        {
+            personInput[i].disabled = false;
+        }
+    }else{
+        form1.submit();
+    }
+}

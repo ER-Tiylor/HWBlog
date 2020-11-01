@@ -12,10 +12,11 @@
 <html>
 <head>
     <title>火星博客</title>
+    <c:set value="${pageContext.request.contextPath}" var="path" scope="page"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="static/css/base.css" rel="stylesheet">
-    <link href="static/css/main.css" rel="stylesheet">
-    <script type="text/javascript" src="static/js/base.js" ></script>
+    <link href="${path}/static/css/base.css" rel="stylesheet">
+    <link href="${path}/static/css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="${path}/static/js/base.js" ></script>
 </head>
 <body>
     <header>
@@ -28,7 +29,7 @@
                     <li><a href="#">火网首页</a> </li>
                     <li><a href="#">火星论坛</a> </li>
                     <li><a href="#">火星资源</a></li>
-                    <li><a href="#">火网中心</a>
+                    <li><a href="${path}/PersonalServlet">火网中心</a>
                         <ul class="sub_nav" id="sub_nav">
                             <li><a href="#">个人博客</a></li>
                             <li><a href="#">创作中心</a></li>
@@ -64,7 +65,7 @@
                             </ul>
                         </c:if>
                         <c:if test="${user==null}">
-                            <a class="logandregist" href="${pageContext.request.contextPath}/MainLoginUIServlet" target="_blank">注册/登陆</a>
+                            <a class="logandregist" href="${path}/MainLoginUIServlet" target="_blank">注册/登陆</a>
                         </c:if>
                     </div>
                 </div>
@@ -80,7 +81,7 @@
             <div class="banner">
                 <div id="banner" class="fader">
                     <li class="slide" ><a href="#" target="_blank">
-                        <img src="static/images/banner01.jpg"><span class="imginfo">即以背影赢了天下，为何回头乱了芳华</span></a>
+                        <img src="${path}/static/images/banner01.jpg"><span class="imginfo">即以背影赢了天下，为何回头乱了芳华</span></a>
                     </li>
                     <div class="fader_controls">
                         <div class="page prev" data-target="prev">&lsaquo;</div>
@@ -113,7 +114,7 @@
         <div class="blogsbox">
             <div class="blogs">
                 <h3 class="blogtitle"><a href="/" target="_blank">别让这些闹心的套路，毁了你的网页设计!</a></h3>
-                <span class="blogpic"><a href="/" title=""><img src="static/images/avatar.jpg" alt=""></a></span>
+                <span class="blogpic"><a href="/" title=""><img src="${path}/static/images/avatar.jpg" alt=""></a></span>
                 <div class="bloginfo">
                     <p class="blogtext"><a href="/" target="_blank">我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！我采用如下方法：1、首先在数据库模型，增加字段，分别是图片2，图片3。2、增加标签模板，用if，else if 来判断，输出。思路已打开，样式调用就可以多样化啦！</a> </p>
                     <ul>
